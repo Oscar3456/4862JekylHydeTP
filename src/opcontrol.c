@@ -27,8 +27,32 @@
  * This task should never exit; it should end with some kind of infinite loop, even if empty.
  */
 void operatorControl() {
+	int intakeState;
+	int catState;
 	while (1) {
-		printf("Hello PROS User!\n");
-		delay(20);
+		driveSlew((joystickGetAnalog(1, 2) + joystickGetAnalog(1, 1)), (joystickGetAnalog(1, 2) - joystickGetAnalog(1, 2)), 5);
+
+		if(joystickGetDigital(1, 5, JOY_UP)){
+			intakeState = INTAKE;
+		} else if(joystickGetDigital(1, 5, JOY_DOWN)){
+			intakeState = OUTTAKE;
+		} else {
+			intakeState = STOP_INTAKE;
+		}
+
+		if(joystickGetDigital(1, 6, JOY_UP)){
+			if(joystickGetDigital(1, 6, JOY_DOWN)){ // if les deux
+				catState = STOP_CAT;
+			} else {
+				catState = FIRE_CAT;
+			}
+		} else if(joystickGetDigital(1, 6, JOY_DOWN)){
+			catState = MOVE_BALL;
+		} else {
+			catState = RELOAD_CAT;
+		}
+
+		intakeCtrl(intakeState);
+		catCtrl(catState);
 	}
 }

@@ -6,11 +6,11 @@
 #define RELOAD_CAT 2
 #define FIRE_CAT 3
 
-int catPosGoal;
-
 void setCatMtr(int power);
 
 int getCatPot();
+
+void setCatPos(int goal);
 
 void catCtrl(int state); // 0(stop all), 1(move ball to inner slot), 2(reload), 3(fire)
 

@@ -27,14 +27,18 @@
 
 #include <API.h>
 
+#include "drive.h"
+#include "catapult.h"
+#include "intake.h"
+
 //DEFINE MOTORS:
 #define DRIVE_LEFT_A_MTR 2 //Y-ed
 #define DRIVE_RIGHT_A_MTR 3    //Y-ed
 
-#define CATAPULT_A_MTR 4    // Power Expander A
+#define CAT_A_MTR 4    // Power Expander A
 #define BALL_INTAKE_MTR 5 // Power Expander B
-#define DESCORER_MTR 6 // Power Expander C
-#define CATAPULT_B_MTR 7  // Power Expander D
+#define DESCORE_MTR 6 // Power Expander C
+#define CAT_B_MTR 7  // Power Expander D
 
 #define DRIVE_LEFT_B_MTR 8 //Y-ed
 #define DRIVE_RIGHT_B_MTR 9 //Y-ed
