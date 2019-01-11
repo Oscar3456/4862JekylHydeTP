@@ -38,7 +38,7 @@ void updateBallPos(int intakePower){
       ballInIntake = false;
       ballsInCat += 1;
     }
-  } else if(intakePower < 0){
+  } else{
     if(ballInIntake && !getIntakeSensor()){ // if ball has exited intake
       ballInIntake = false;
     }

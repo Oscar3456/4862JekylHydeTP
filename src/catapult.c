@@ -5,6 +5,8 @@
 #define KI 0
 #define KD 0
 
+#define INTEGRAL_RANGE 100
+
 #define CAT_UP_POS 0
 #define CAT_DOWN_POS 1000
 #define CAT_FIRE_POS 1500
@@ -24,12 +26,23 @@ void setCatMtr(int power){
 
 int getCatPot();
 
-void setCatPos(int goal){ //TODO: lookup and make pid
+void setCatPos(int goal){
   int pos = getCatPot();
   error = goal - pos;
+
+  if(KP != 0){
+    if(abs(error ) < INTEGRAL_RANGE){
+      integral += error;
+    } else {
+      integral = 0;
+    }
+  } else {
+    integral = 0;
+  }
+
   derivative = error - lastError;
-  setCatMtr((error * KP) + (derivative * KD));
   lastError = error;
+  setCatMtr((error * KP) + (derivative * KD));
 }
 
 void catCtrl(int state){

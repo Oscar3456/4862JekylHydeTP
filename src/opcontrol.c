@@ -29,11 +29,15 @@
 void operatorControl() {
 	int intakeState;
 	int catState;
+	int descoreState;
 	while (1) {
-		driveSlew((joystickGetAnalog(1, 2) + joystickGetAnalog(1, 1)), (joystickGetAnalog(1, 2) - joystickGetAnalog(1, 2)), 5);
+		driveSlew((joystickGetAnalog(1, 2) + joystickGetAnalog(1, 1)), (joystickGetAnalog(1, 2) - joystickGetAnalog(1, 2)), DEFAULT_SLEW);
 
 		if(joystickGetDigital(1, 5, JOY_UP)){
 			intakeState = INTAKE;
+			if(joystickGetDigital(1, 5, JOY_DOWN)){
+				intakeState = ONE_INTAKE;
+			}
 		} else if(joystickGetDigital(1, 5, JOY_DOWN)){
 			intakeState = OUTTAKE;
 		} else {
@@ -42,16 +46,27 @@ void operatorControl() {
 
 		if(joystickGetDigital(1, 6, JOY_UP)){
 			if(joystickGetDigital(1, 6, JOY_DOWN)){ // if les deux
-				catState = STOP_CAT;
+				catState = MOVE_BALL;
 			} else {
 				catState = FIRE_CAT;
 			}
 		} else if(joystickGetDigital(1, 6, JOY_DOWN)){
-			catState = MOVE_BALL;
+			catState = STOP_CAT;
 		} else {
 			catState = RELOAD_CAT;
 		}
 
+		if(joystickGetDigital(1, 7, JOY_UP)){
+			descoreState = DESCORE_BACK;
+		} else if(joystickGetDigital(1, 7, JOY_DOWN)){
+			descoreState = DESCORE_DOWN_FRONT;
+		} else if(joystickGetDigital(1, 7, JOY_LEFT)){
+			descoreState = DESCORE_UP_FRONT;
+		} else{
+			descoreState = DESCORE_JOY;
+		}
+
+		descoreCtrl(descoreState, joystickGetAnalog(1, 3));
 		intakeCtrl(intakeState);
 		catCtrl(catState);
 	}
