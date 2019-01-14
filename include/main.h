@@ -44,6 +44,25 @@
 #define DRIVE_LEFT_B_MTR 9 //Y-ed
 #define DRIVE_RIGHT_B_MTR 8 //Y-ed
 
+//DEFINE SENSORS
+#define CAT_POT 1
+#define DESCORE_POT 2
+#define INTAKE_SENS 3
+#define CAT_FRONT_BALL_SENS 4
+#define CAT_BACK_BALL_SENS 5
+#define AUTON_POT 6
+
+#define INTAKE_ENC_TOP 1
+#define INTAKE_ENC_BOT 2
+#define LEFT_ENC_TOP 3
+#define LEFT_ENC_BOT 4
+#define RIGHT_ENC_TOP 5
+#define RIGHT_ENC_BOT 6
+#define PERP_ENC_TOP 7
+#define PERP_ENC_BOT 8
+
+
+
 // Allow usage of this file in C++ programs
 #ifdef __cplusplus
 extern "C" {

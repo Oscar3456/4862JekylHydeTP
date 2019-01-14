@@ -1,13 +1,12 @@
 #include "main.h"
 #include "descore.h"
 
-#define BACK_POS 1
-#define UP_FRONT_POS 2
-#define DOWN_FRONT_POS 3
 
 #define KP 1
 
-int getDescorePos();
+int getDescorePot(){
+  return analogRead(DESCORE_POT);
+}
 
 void setDescoreMtr(int power){
   motorSet(DESCORE_MTR, power);
@@ -15,23 +14,23 @@ void setDescoreMtr(int power){
 
 void setDescorePos(int posGoal){
   int error;
-  error = posGoal - getDescorePos();
+  error = posGoal - getDescorePot();
   setDescoreMtr(error * KP);
 }
 
 void descoreCtrl(int state, int joy){
   switch(state){
-    case DESCORE_JOY:
+    case DESCORE_JOY_CTRL:
       setDescoreMtr(joy);
       break;
     case DESCORE_BACK:
-      setDescorePos(BACK_POS);
+      setDescorePos(DESCORE_BACK_POS);
       break;
     case DESCORE_UP_FRONT:
-      setDescorePos(UP_FRONT_POS);
+      setDescorePos(DESCORE_UP_FRONT_POS);
       break;
-    case DESCORE_DOWN_FRONT:
-      setDescorePos(DOWN_FRONT_POS);
+    case DESCORE_GROUND:
+      setDescorePos(DESCORE_GROUND_POS);
       break;
   }
 }

@@ -28,7 +28,9 @@ void intakeSlew(int goal, int slew){
   setIntakeMtr(power);
 }
 
-bool getIntakeSensor();
+bool getIntakeSensor(){
+  return false;
+}
 
 void updateBallPos(int intakePower){
   if (intakePower > 0) {
@@ -47,22 +49,28 @@ void updateBallPos(int intakePower){
 
 void intakeCtrl(int state){ // -1 (backwards), 0 (stop), 1 (load one ball), 2 (forewards)
   switch (state){
-    case OUTTAKE:
+    case INTAKE_OUTTAKE:
       intakeSlew(STD_INTAKE_POW * -1, STD_INTAKE_SLEW);
       break;
 
-    case STOP_INTAKE:
+    case INTAKE_STOP:
       intakeSlew(0, FAST_INTAKE_SLEW); // stop immediately
       break;
 
-    case ONE_INTAKE:
+    case INTAKE_ONE:
       if(ballsInCat > 0) { // if balls are in intake
         intakeSlew(0, FAST_INTAKE_SLEW); // stop immediately
       } else {
         intakeSlew(STD_INTAKE_POW, STD_INTAKE_SLEW); // keep intaking
       }
       break;
-    case INTAKE:
+    case INTAKE_TWO:
+      if(ballsInCat >= 2) { // 2 balls are in intake
+        intakeSlew(0, FAST_INTAKE_SLEW); // stop immediately
+      } else {
+        intakeSlew(STD_INTAKE_POW, STD_INTAKE_SLEW); // keep intaking
+      }
+    case INTAKE_INTAKE:
     intakeSlew(STD_INTAKE_POW, STD_INTAKE_SLEW);
       break;
   }

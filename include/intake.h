@@ -3,10 +3,11 @@
 
 extern int ballsInCat;
 
-#define OUTTAKE -1
-#define STOP_INTAKE 0
-#define ONE_INTAKE 1
-#define INTAKE 2
+#define INTAKE_OUTTAKE -1
+#define INTAKE_STOP 0
+#define INTAKE_ONE 1
+#define INTAKE_TWO 2
+#define INTAKE_INTAKE 3
 
 void setIntakeMtr(int power);
 

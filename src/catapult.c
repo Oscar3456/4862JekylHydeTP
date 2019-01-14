@@ -7,10 +7,6 @@
 
 #define INTEGRAL_RANGE 100
 
-#define CAT_UP_POS 0
-#define CAT_DOWN_POS 1000
-#define CAT_FIRE_POS 1500
-
 int catPosGoal;
 
 int error;
@@ -24,7 +20,9 @@ void setCatMtr(int power){
   motorSet(CAT_B_MTR, power);
 }
 
-int getCatPot();
+int getCatPot(){
+  return analogRead(CAT_POT);
+}
 
 void setCatPos(int goal){
   int pos = getCatPot();
@@ -42,23 +40,23 @@ void setCatPos(int goal){
 
   derivative = error - lastError;
   lastError = error;
-  setCatMtr((error * KP) + (derivative * KD));
+  setCatMtr((error * KP) + (integral * KI) + (derivative * KD));
 }
 
 void catCtrl(int state){
   switch(state){
-    case STOP_CAT:
+    case CAT_STOP:
       setCatMtr(0);
       break;
-    case MOVE_BALL:
-      setCatPos(CAT_UP_POS);
+    case CAT_MOVE_BALL:
+      setCatPos(CAT_MOVE_BALL_POS);
       break;
-    case RELOAD_CAT:
+    case CAT_RELOAD:
       setCatPos(CAT_DOWN_POS);
       break;
-    case FIRE_CAT:
+    case CAT_FIRE:
       setCatPos(CAT_FIRE_POS);
-      ballsInCat -= 2;
+      ballsInCat = 0;
       break;
   }
 } // 0(stop all), 1(move ball to inner slot), 2(reload), 3(fire)
