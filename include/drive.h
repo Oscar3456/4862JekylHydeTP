@@ -8,17 +8,20 @@
 extern float angleGoal;
 extern float distGoal;
 
+extern float d_angleRange;
+extern float d_distRange;
+
 #define STD_SLEW 5
 
-float getDriveAngle(float leftStart, float rightStart);
+float getDriveAngle();
 
 void startMovement();
 
-void updateTurnToAngle(float angleGoal);
+void updateTurnToAngle(float angleGoal, float kp, float kd, int slew, int maxPow);
 
-void doTurnToAngle(float angleGoal, float kp, float kd, int slew, int maxPow);
+void doTurnToAngle(float angleGoal);
 
-void updateDriveStraight(float distGoal, float kp, float kd, int slew, int maxPow);
+void updateDriveStraight(float distGoal, float angleKp, float angleKd, float distKp, float distKd, int slew, int maxPow);
 
 void doDriveStraight(float distGoal);
 

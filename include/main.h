@@ -32,6 +32,10 @@
 #include "intake.h"
 #include "descore.h"
 
+#include "lcd.h"
+
+#include "auton.h"
+
 //DEFINE MOTORS:
 #define DRIVE_LEFT_A_MTR 3 //Y-ed
 #define DRIVE_RIGHT_A_MTR 2    //Y-ed
@@ -51,6 +55,7 @@
 #define CAT_FRONT_BALL_SENS 4
 #define CAT_BACK_BALL_SENS 5
 #define AUTON_POT 6
+#define POWER_EXP_STATUS 7
 
 #define INTAKE_ENC_TOP 1
 #define INTAKE_ENC_BOT 2

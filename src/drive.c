@@ -27,17 +27,20 @@ float d_leftStart;
 float d_rightStart;
 float d_startAngle;
 
+float d_angleRange;
+float d_distRange;
+
 int d_leftJoy;
 int d_rightJoy;
 
-float getDriveAngle(float leftStart, float rightStart){
+float getDriveAngle(){
   return (getLeftInches() - getRightInches()) * INCHES_TO_RAD;
 }
 
 void startMovement(){
   d_leftStart = getLeftInches();
   d_rightStart = getRightInches();
-  d_startAngle = getDriveAngle(d_leftStart, d_rightStart);
+  d_startAngle = getDriveAngle();
   d_angleError = 0;
   d_angleLastError = 0;
   d_distError = 0;
@@ -53,7 +56,7 @@ void updateTurnToAngle(float angleGoal, float kp, float kd, int slew, int maxPow
 }
 
 void doTurnToAngle(float angleGoal){
-  d_angleError = d_angleGoal - getDriveAngle(d_leftStart, d_rightStart);
+  d_angleError = d_angleGoal - getDriveAngle();
   float derivative = d_angleError - d_angleLastError;
   d_angleLastError = d_angleError;
   int power = (d_angleError * d_angleKp) + (derivative * d_angleKd);
@@ -98,7 +101,7 @@ void doDriveStraight(float distGoal){
   leftPower = distancePower;
   rightPower = distancePower;
 
-  d_angleError = 0 - getDriveAngle(d_leftStart, d_rightStart);
+  d_angleError = d_startAngle - getDriveAngle();
   if(d_angleError != 0){
     angleDerivative = d_angleError - d_angleLastError;
     d_angleLastError = d_angleError;

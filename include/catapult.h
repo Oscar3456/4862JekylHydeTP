@@ -13,6 +13,8 @@
 
 #define CAT_DEADBAND 20
 
+void zeroCatPot();
+
 void setCatMtr(int power);
 
 int getCatPot();

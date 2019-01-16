@@ -1,9 +1,11 @@
 #include "main.h"
 #include "auton.h"
+#include "math.h"
 
 int catState;
 int intakeState;
 int descoreState;
+int driveState;
 
 void robotAutonCtrl(){
   catCtrl(catState);
@@ -62,8 +64,8 @@ bool descoreIsDone(){
 }
 
 bool intakeIsDone(){
+  bool isDone = false;
   switch (intakeState){
-    bool isDone = false;
     case INTAKE_ONE:
       if(ballsInCat > 0) { // if balls are in intake
         isDone = true;
@@ -73,8 +75,27 @@ bool intakeIsDone(){
       if(ballsInCat >= 2) { // 2 balls are in intake
         isDone = true;
       }
-      return isDone;
   }
+  return isDone;
+}
+
+bool driveIsDone(){
+  bool isDone = false;
+  float error;
+  switch(driveState){
+    case TURN_TO_ANGLE:
+      error = angleGoal - getDriveAngle();
+      if(fabs(error) < d_angleRange){
+        isDone = true;
+      }
+      break;
+    case DRIVE_TO_DISTANCE:
+    error = distGoal - ((getLeftInches() + getRightInches()) / 2);
+      if(fabs(error) < d_distRange){
+        isDone = true;
+      }
+  }
+  return isDone;
 }
 
 void await(bool (*isDone)){

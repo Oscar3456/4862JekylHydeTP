@@ -7,6 +7,8 @@
 
 #define INTEGRAL_RANGE 100
 
+int catPotZero =0;
+
 int catPosGoal;
 
 int error;
@@ -20,8 +22,12 @@ void setCatMtr(int power){
   motorSet(CAT_B_MTR, power);
 }
 
+void zeroCatPot(){
+  catPotZero = analogRead(CAT_POT);
+}
+
 int getCatPot(){
-  return analogRead(CAT_POT);
+  return analogRead(CAT_POT) - catPotZero;
 }
 
 void setCatPos(int goal){
