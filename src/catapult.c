@@ -7,6 +7,8 @@
 
 #define INTEGRAL_RANGE 100
 
+int catState;
+
 int catPotZero =0;
 
 int catPosGoal;

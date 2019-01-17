@@ -12,6 +12,8 @@
 
 #define DESCORE_DEADBAND 20
 
+extern int descoreState;
+
 int getDescorePot();
 
 void setDescoreMtr(int power);

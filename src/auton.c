@@ -2,11 +2,6 @@
 #include "auton.h"
 #include "math.h"
 
-int catState;
-int intakeState;
-int descoreState;
-int driveState;
-
 int timerStart;
 int timerGoal;
 
@@ -16,21 +11,17 @@ void twoFlagRed(){
   await(catIsDone);
 
   catState = CAT_STOP;
-  driveState = TURN_TO_ANGLE;
   updateTurnToAngle(degreesToRad(-25), 1, -0.2, 5, 100, degreesToRad(5));
   await(driveIsDone);
 
-  driveState = DRIVE_TO_DISTANCE;
-  updateDriveStraight(20, 1, 0.2, 1, 0.2, 5, 100, 1);
+  updateDriveStraight(20, 1, -0.2, 1, -0.2, 5, 100, 1);
   await(driveIsDone);
 
-  driveState = DRIVE_W_JOY;
   updateDriveWjoy(-60, -60, 5);
   startTimer(500);
   await(timer);
 
-  updateDriveWjoy(0, 0, 127);
-  robotAutonCtrl();
+  motorStopAll();
 }
 
 void twoFlagBlue();

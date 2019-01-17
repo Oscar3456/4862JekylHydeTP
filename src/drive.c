@@ -6,6 +6,8 @@
 #define PERP_TO_INCHES 0.04799655442984406336540149613344
 #define INCHES_TO_RAD 12
 
+int driveState;
+
 Encoder leftTrack;
 Encoder rightTrack;
 Encoder perpTrack;
@@ -58,6 +60,7 @@ void updateTurnToAngle(float angleGoal, float kp, float kd, int slew, int maxPow
   d_slew = slew;
   d_maxPow = maxPow;
   d_angleRange = angleRange;
+  driveState = TURN_TO_ANGLE;
 }
 
 void doTurnToAngle(float angleGoal){
@@ -84,6 +87,7 @@ void updateDriveStraight(float distGoal, float angleKp, float angleKd, float dis
   d_slew = slew;
   d_maxPow = maxPow;
   d_distRange = distRange;
+  driveState = DRIVE_TO_DISTANCE;
 }
 
 void doDriveStraight(float distGoal){
@@ -135,6 +139,7 @@ void updateDriveWjoy(int leftJoy, int rightJoy, int slew){
   d_rightJoy = rightJoy;
   d_slew = slew;
   d_maxPow = 127;
+  driveState = DRIVE_W_JOY;
 }
 
 void initDriveEnc(){

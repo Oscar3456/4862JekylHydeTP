@@ -10,6 +10,8 @@ int ballsInCat;
 bool ballInIntake; // ball is right at the top of the intake
 int lastState;
 
+int intakeState;
+
 void setIntakeMtr(int power){
   motorSet(BALL_INTAKE_MTR, power);
 }

@@ -4,6 +4,8 @@
 
 #define KP 1
 
+int descoreState;
+
 int getDescorePot(){
   return analogRead(DESCORE_POT);
 }

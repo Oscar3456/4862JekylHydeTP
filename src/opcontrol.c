@@ -27,14 +27,8 @@
  * This task should never exit; it should end with some kind of infinite loop, even if empty.
  */
 void operatorControl() {
-	int intakeState;
-	int catState;
-	int descoreState;
-	int driveState;
+	int driveState = DRIVE_W_JOY;
 	while (1) {
-
-		driveState = DRIVE_W_JOY;
-
 		updateDriveWjoy((joystickGetAnalog(1, 2) + joystickGetAnalog(1, 1)), (joystickGetAnalog(1, 2) - joystickGetAnalog(1, 2)), STD_SLEW);
 
 		if(joystickGetDigital(1, 5, JOY_UP)){

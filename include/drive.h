@@ -11,6 +11,8 @@ extern float distGoal;
 extern float d_angleRange;
 extern float d_distRange;
 
+extern int driveState;
+
 #define STD_SLEW 5
 
 float getDriveAngle();

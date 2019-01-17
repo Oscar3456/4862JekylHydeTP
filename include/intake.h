@@ -3,6 +3,8 @@
 
 extern int ballsInCat;
 
+extern int intakeState;
+
 #define INTAKE_OUTTAKE -1
 #define INTAKE_STOP 0
 #define INTAKE_ONE 1
