@@ -35,7 +35,7 @@ void operatorControl() {
 			intakeState = INTAKE_INTAKE;
 			if(joystickGetDigital(1, 5, JOY_DOWN)){
 				intakeState = INTAKE_ONE;
-			}
+		}
 		} else if(joystickGetDigital(1, 5, JOY_DOWN)){
 			intakeState = INTAKE_OUTTAKE;
 		} else {
