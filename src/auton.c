@@ -7,10 +7,52 @@ int intakeState;
 int descoreState;
 int driveState;
 
+int timerStart;
+int timerGoal;
+
+void twoFlagRed(){
+  startMovement();
+  catState = CAT_FIRE;
+  await(catIsDone);
+
+  catState = CAT_STOP;
+  driveState = TURN_TO_ANGLE;
+  updateTurnToAngle(degreesToRad(-25), 1, -0.2, 5, 100, degreesToRad(5));
+  await(driveIsDone);
+
+  driveState = DRIVE_TO_DISTANCE;
+  updateDriveStraight(20, 1, 0.2, 1, 0.2, 5, 100, 1);
+  await(driveIsDone);
+
+  driveState = DRIVE_W_JOY;
+  updateDriveWjoy(-60, -60, 5);
+  startTimer(500);
+  await(timer);
+
+  updateDriveWjoy(0, 0, 127);
+  robotAutonCtrl();
+}
+
+void twoFlagBlue();
+
 void robotAutonCtrl(){
   catCtrl(catState);
   intakeCtrl(intakeState);
   descoreCtrl(descoreState, 0);
+  driveCtrl(driveState);
+}
+
+void startTimer(int goal){
+  timerStart = millis();
+  timerGoal = goal;
+}
+
+bool timer(){
+  if((int)(millis() - timerStart) > timerGoal){
+    return true;
+  } else {
+      return false;
+  }
 }
 
 bool catIsDone(){
@@ -98,8 +140,8 @@ bool driveIsDone(){
   return isDone;
 }
 
-void await(bool (*isDone)){
-  while(!(*isDone)){
+void await(bool (*isDone_ptr)() ){
+  while(! (*isDone_ptr)()){
     robotAutonCtrl();
   }
 }

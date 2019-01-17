@@ -24,5 +24,8 @@
  * so, the robot will await a switch to another mode or disable/enable cycle.
  */
 void autonomous() {
-  
+  switch(finalAuton){
+    case TWO_FLAG:
+      break;
+  }
 }

@@ -15,13 +15,15 @@ extern float d_distRange;
 
 float getDriveAngle();
 
+float degreesToRad(int degrees);
+
 void startMovement();
 
-void updateTurnToAngle(float angleGoal, float kp, float kd, int slew, int maxPow);
+void updateTurnToAngle(float angleGoal, float kp, float kd, int slew, int maxPow, float angleRange);
 
 void doTurnToAngle(float angleGoal);
 
-void updateDriveStraight(float distGoal, float angleKp, float angleKd, float distKp, float distKd, int slew, int maxPow);
+void updateDriveStraight(float distGoal, float angleKp, float angleKd, float distKp, float distKd, int slew, int maxPow, float driveRange);
 
 void doDriveStraight(float distGoal);
 

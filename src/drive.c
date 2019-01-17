@@ -37,6 +37,10 @@ float getDriveAngle(){
   return (getLeftInches() - getRightInches()) * INCHES_TO_RAD;
 }
 
+float degreesToRad(int degrees){
+  return degrees * 0.01745329;
+}
+
 void startMovement(){
   d_leftStart = getLeftInches();
   d_rightStart = getRightInches();
@@ -47,12 +51,13 @@ void startMovement(){
   d_distLastError = 0;
 }
 
-void updateTurnToAngle(float angleGoal, float kp, float kd, int slew, int maxPow){
+void updateTurnToAngle(float angleGoal, float kp, float kd, int slew, int maxPow, float angleRange){
   d_angleGoal = angleGoal;
   d_angleKp = kp;
   d_angleKd = kd;
   d_slew = slew;
   d_maxPow = maxPow;
+  d_angleRange = angleRange;
 }
 
 void doTurnToAngle(float angleGoal){
@@ -70,7 +75,7 @@ void doTurnToAngle(float angleGoal){
   driveSlew(power, power * -1, d_slew);
 }
 
-void updateDriveStraight(float distGoal, float angleKp, float angleKd, float distKp, float distKd, int slew, int maxPow){
+void updateDriveStraight(float distGoal, float angleKp, float angleKd, float distKp, float distKd, int slew, int maxPow, float distRange){
   d_distGoal = distGoal;
   d_angleKp = angleKp;
   d_angleKd = angleKd;
@@ -78,6 +83,7 @@ void updateDriveStraight(float distGoal, float angleKp, float angleKd, float dis
   d_distKd = distKd;
   d_slew = slew;
   d_maxPow = maxPow;
+  d_distRange = distRange;
 }
 
 void doDriveStraight(float distGoal){
