@@ -54,12 +54,15 @@ void operatorControl() {
 			catState = CAT_RELOAD;
 		}
 
-		if(joystickGetDigital(1, 7, JOY_UP)){
-			descoreState = DESCORE_BACK;
-		} else if(joystickGetDigital(1, 7, JOY_DOWN)){
-			descoreState = DESCORE_GROUND;
-		} else if(joystickGetDigital(1, 7, JOY_LEFT)){
-			descoreState = DESCORE_UP_FRONT;
+
+		if(abs(joystickGetAnalog(1, 3)) < 10){
+			if(joystickGetDigital(1, 7, JOY_UP)){
+				descoreState = DESCORE_BACK;
+			} else if(joystickGetDigital(1, 7, JOY_DOWN)){
+				descoreState = DESCORE_GROUND;
+			} else if(joystickGetDigital(1, 7, JOY_LEFT)){
+				descoreState = DESCORE_UP_FRONT;
+			}
 		} else{
 			descoreState = DESCORE_JOY_CTRL;
 		}

@@ -5,6 +5,9 @@
 #define KI 0
 #define KD 0
 
+#define BOT_HOLD_POW 20
+#define TOP_HOLD_POW 15
+
 #define INTEGRAL_RANGE 100
 
 int catState;
@@ -57,13 +60,21 @@ void catCtrl(int state){
       setCatMtr(0);
       break;
     case CAT_MOVE_BALL:
-      setCatPos(CAT_MOVE_BALL_POS);
+      if(getCatPot() > CAT_MOVE_BALL_POS - 10){
+        setCatMtr(TOP_HOLD_POW);
+      } else {
+        setCatMtr(0);
+      }
       break;
     case CAT_RELOAD:
-      setCatPos(CAT_DOWN_POS);
+      if(getCatPot() < CAT_DOWN_POS){
+        setCatMtr(BOT_HOLD_POW);
+      } else {
+        setCatMtr(-120);
+      }
       break;
     case CAT_FIRE:
-      setCatPos(CAT_FIRE_POS);
+      setCatMtr(-120);
       ballsInCat = 0;
       break;
   }

@@ -6,6 +6,8 @@
 #define PERP_TO_INCHES 0.04799655442984406336540149613344
 #define INCHES_TO_RAD 12
 
+#define FRIKING_ANGLE_CONST 1
+
 int driveState;
 
 Encoder leftTrack;
@@ -36,7 +38,7 @@ int d_leftJoy;
 int d_rightJoy;
 
 float getDriveAngle(){
-  return (getLeftInches() - getRightInches()) * INCHES_TO_RAD;
+  return (getLeftInches() - getRightInches()) * FRIKING_ANGLE_CONST;
 }
 
 float degreesToRad(int degrees){
